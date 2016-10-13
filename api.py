@@ -30,8 +30,7 @@ def slide():
     data_list = [] # 全ページのデータを集める配列
     # select = Select(driver.find_element_by_id('slideshows_lang'))
     # select.select_by_value('ja').click()
-    driver.execute_script('window.scrollTo(0, 10)')
-    time.sleep(3) 
+    time.sleep(10) 
     driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']").click()
     time.sleep(3) 
     for i in range(1,3): 
@@ -75,7 +74,7 @@ def slide():
         next = driver.find_element_by_xpath("//li[@class='arrow']/a[@rel='next']")
         next.click() # Nextボタンをクリック
         time.sleep(3) # 移動するまで待つ
-    driver.close() # ブラウザ操作を終わらせる
+    driver.close() # ブラウザ操作をs終わらせる
     jsonstring = json.dumps(data_list,ensure_ascii=False,indent=2) # 作った辞書をjson形式にして出力する
     return jsonstring
  
