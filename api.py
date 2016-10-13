@@ -19,13 +19,17 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')   
-def slide():
+@app.route('/')
+def index():
+    return "api/データ化するページ数"
+
+@app.route('/api/<string:word>/<int:page>')   
+def slide(word,page):
 
     driver = webdriver.PhantomJS() # PhantomJSを使う 
     driver.set_window_size(1124, 850) # PhantomJSのサイズを指定する
     
-    URL = "http://www.slideshare.net/search/slideshow?ft=&lang=**&page=2&q=Python&qid=cee8520e-45ec-47d8-97dc-23fb0d706ad7&searchfrom=header&sort=&ud="
+    URL = "http://www.slideshare.net/search/slideshow?searchfrom=header&q=" + word
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
 
@@ -34,8 +38,8 @@ def slide():
     japan = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']") # 言語選択リストの日本語の部分を抽出
     japan.click() # 言語選択の日本語を選択
     time.sleep(3) 
-    for i in range(1,3): 
-        print(str(i) + u"ページ目")
+    for i in range(0,page): 
+        print(str(i+1) + u"ページ目")
         data = driver.page_source.encode('utf-8') # ページ内の情報をutf-8で用意する
         soup = BeautifulSoup(data,"lxml") # 加工しやすいようにlxml形式にする
         slide_list = soup.find_all("div",class_="thumbnail-content") # スライド単位で抽出
