@@ -65,6 +65,7 @@ def slide():
             data_list.append(slide_in) # data_listに1ページ分の内容をまとめる
 
         nextarrow = driver.find_elements_by_class_name("arrow") # 次ページへのnextボタンを取得
+        time.sleep(3) # 移動するまで待つ
         next = nextarrow[1].find_element_by_tag_name("a") # 2つ目のarrow内のa要素を取得
         next.click() # Nextボタンをクリック
         time.sleep(3) # 移動するまで待つ
