@@ -30,6 +30,7 @@ def slide():
     data_list = [] # 全ページのデータを集める配列
     # select = Select(driver.find_element_by_id('slideshows_lang'))
     # select.select_by_value('ja').click()
+    driver.execute_script('window.scrollTo(0, 10)')
     time.sleep(3) 
     driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']").click()
     time.sleep(3) 
