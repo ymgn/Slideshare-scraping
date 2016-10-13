@@ -24,7 +24,7 @@ def slide():
     driver = webdriver.PhantomJS() # PhantomJSを使う 
     driver.set_window_size(1124, 850) # PhantomJSのサイズを指定する
 
-    URL = "http://www.slideshare.net/search/slideshow?lang=%2A%2A&page=1&q=Python&qid=38824538-a7bb-43ee-85e5-057d3c1630fc&searchfrom=header&sort=relevance"
+    URL = "http://www.slideshare.net/search/slideshow?ft=&lang=**&page=2&q=Python&qid=cee8520e-45ec-47d8-97dc-23fb0d706ad7&searchfrom=header&sort=&ud="
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
     for i in range(1,3):
