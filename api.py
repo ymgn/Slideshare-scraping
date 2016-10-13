@@ -27,7 +27,7 @@ def slide():
     URL = "http://www.slideshare.net/search/slideshow?lang=%2A%2A&page=1&q=Python&qid=38824538-a7bb-43ee-85e5-057d3c1630fc&searchfrom=header&sort=relevance"
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
-    for i in range(1,2):
+    for i in range(1,3):
         print(str(i) + u"ページ目")
         data = driver.page_source.encode('utf-8') # ページ内の情報をutf-8で用意する
         soup = BeautifulSoup(data,"lxml") # 加工しやすいようにlxml形式にする
