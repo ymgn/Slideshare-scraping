@@ -24,13 +24,14 @@ def slide():
 
     driver = webdriver.PhantomJS() # PhantomJSを使う 
     driver.set_window_size(1124, 850) # PhantomJSのサイズを指定する
-
+    
     URL = "http://www.slideshare.net/search/slideshow?ft=&lang=**&page=2&q=Python&qid=cee8520e-45ec-47d8-97dc-23fb0d706ad7&searchfrom=header&sort=&ud="
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
     # select = Select(driver.find_element_by_id('slideshows_lang'))
     # select.select_by_value('ja').click()
     time.sleep(5)
+    driver.execute_script('window.scrollTo(0, -4000)')
     japan = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']")
     japan.click()
     time.sleep(3) 
