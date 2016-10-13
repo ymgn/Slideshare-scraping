@@ -59,7 +59,7 @@ def slide():
             if "likes" in info:
                 likes = info[info.find(", ")+2:info.find("likes")] # likes部分を抽出
             else:
-                likes = 0
+                likes = "0"
             slide_in["likes"] = likes.strip() # strip()は両端の空白と改行をなくしてくれる
 
             data_list.append(slide_in) # data_listに1ページ分の内容をまとめる
