@@ -64,15 +64,13 @@ def slide():
 
             data_list.append(slide_in) # data_listに1ページ分の内容をまとめる
 
-        nextarrow = driver.find_elements_by_class_name("arrow") # 次ページへのnextボタンを取得
-        next = nextarrow[1].find_element_by_tag_name("a") # 2つ目のarrow内のa要素を取得
-        print(nextarrow)
+        next = driver.find_element_by_xpath("//li[@class='arrow']/a[@rel='next']")
         next.click() # Nextボタンをクリック
         time.sleep(3) # 移動するまで待つ
-    driver.quit # ブラウザ操作を終わらせる
+    driver.close() # ブラウザ操作を終わらせる
     jsonstring = json.dumps(data_list,ensure_ascii=False,indent=2) # 作った辞書をjson形式にして出力する
     return jsonstring
-
+ 
 # bashで叩いたかimportで入れたかを判定する
 if __name__ == '__main__':
     app.run()
