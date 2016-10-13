@@ -21,7 +21,7 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return "api/データ化するページ数"
+    return "api/検索する単語/データ化するページ数"
 
 @app.route('/api/<string:word>/<int:page>')   
 def slide(word,page):
@@ -33,8 +33,8 @@ def slide(word,page):
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
 
-    time.sleep(5)
     driver.execute_script('window.scrollTo(0, -4000)') # ページの位置を一番上にスクロールさせる
+    time.sleep(5)
     japan = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']") # 言語選択リストの日本語の部分を抽出
     japan.click() # 言語選択の日本語を選択
     time.sleep(3) 
