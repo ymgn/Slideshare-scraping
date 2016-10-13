@@ -28,12 +28,11 @@ def slide():
     URL = "http://www.slideshare.net/search/slideshow?ft=&lang=**&page=2&q=Python&qid=cee8520e-45ec-47d8-97dc-23fb0d706ad7&searchfrom=header&sort=&ud="
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
-    # select = Select(driver.find_element_by_id('slideshows_lang'))
-    # select.select_by_value('ja').click()
+
     time.sleep(5)
-    driver.execute_script('window.scrollTo(0, -4000)')
-    japan = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']")
-    japan.click()
+    driver.execute_script('window.scrollTo(0, -4000)') # ページの位置を一番上にスクロールさせる
+    japan = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']") # 言語選択リストの日本語の部分を抽出
+    japan.click() # 言語選択の日本語を選択
     time.sleep(3) 
     for i in range(1,3): 
         print(str(i) + u"ページ目")
@@ -72,8 +71,8 @@ def slide():
 
             data_list.append(slide_in) # data_listに1ページ分の内容をまとめる
 
-        driver.execute_script('window.scrollTo(0, 5400)')
-        next = driver.find_element_by_xpath("//li[@class='arrow']/a[@rel='next']")
+        driver.execute_script('window.scrollTo(0, 5400)') # ページャーのある下に移動
+        next = driver.find_element_by_xpath("//li[@class='arrow']/a[@rel='next']") # ページャーのNEXT要素を抽出
         next.click() # Nextボタンをクリック
         time.sleep(3) # 移動するまで待つ
     driver.close() # ブラウザ操作をs終わらせる
