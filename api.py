@@ -27,7 +27,9 @@ def slide():
     URL = "http://www.slideshare.net/search/slideshow?ft=&lang=**&page=2&q=Python&qid=cee8520e-45ec-47d8-97dc-23fb0d706ad7&searchfrom=header&sort=&ud="
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
-    driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[text()='Japanese']").click()
+    select = Select(driver.find_element_by_id('slideshows_lang'))
+    select.select_by_value('ja').click()
+    #driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[text()='Japanese']").click()
     time.sleep(3) 
     for i in range(1,3):
         print(str(i) + u"ページ目")
