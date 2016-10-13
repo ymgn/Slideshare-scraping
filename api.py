@@ -19,7 +19,7 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route('/')   
-def slide):
+def slide:
 
     driver = webdriver.PhantomJS() # PhantomJSを使う 
     driver.set_window_size(1124, 850) # PhantomJSのサイズを指定する
