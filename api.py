@@ -30,9 +30,10 @@ def slide():
     data_list = [] # 全ページのデータを集める配列
     # select = Select(driver.find_element_by_id('slideshows_lang'))
     # select.select_by_value('ja').click()
+    time.sleep(3) 
     driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']").click()
     time.sleep(3) 
-    for i in range(1,3):
+    for i in range(1,3): 
         print(str(i) + u"ページ目")
         data = driver.page_source.encode('utf-8') # ページ内の情報をutf-8で用意する
         soup = BeautifulSoup(data,"lxml") # 加工しやすいようにlxml形式にする
