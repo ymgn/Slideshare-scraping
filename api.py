@@ -64,6 +64,7 @@ def slide():
 
             data_list.append(slide_in) # data_listに1ページ分の内容をまとめる
 
+        driver.execute_script('window.scrollTo(0, 5400)')
         next = driver.find_element_by_xpath("//li[@class='arrow']/a[@rel='next']")
         next.click() # Nextボタンをクリック
         time.sleep(3) # 移動するまで待つ
