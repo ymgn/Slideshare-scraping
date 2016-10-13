@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 # seleniumのwebdriverを使う
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 #ここからflaskの必要分
 import os
 from flask import Flask
