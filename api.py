@@ -33,13 +33,13 @@ def slide(word,page):
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
 
-    driver.execute_script('window.scrollTo(0, -1000)') # ページの位置を一番上にスクロールさせる
+    driver.execute_script('window.scrollTo(0, -1 000)') # ページの位置を一番上にスクロールさせる
     time.sleep(3) # スクロール待ち
 
     search = driver.find_element_by_id("nav-search-query") # 検索欄要素を取得
     search.send_keys(word) # 検索ワードを入力
     search.submit() # 検索をsubmitする
-    time.sleep(3) # 検索後更新待ち
+    time.sleep(5) # 検索後更新待ち
 
     lang = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']") # 言語選択リストの日本語の部分を抽出
     lang.click() # 言語選択の日本語を選択
