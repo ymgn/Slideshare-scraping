@@ -21,7 +21,7 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return "api/検索する単語/データ化するページ数"
+    return "使い方　/api/検索する単語/取得ページ数"
 
 @app.route('/api/<string:word>/<int:page>')   
 def slide(word,page):
@@ -29,15 +29,22 @@ def slide(word,page):
     driver = webdriver.PhantomJS() # PhantomJSを使う 
     driver.set_window_size(1124, 850) # PhantomJSのサイズを指定する
     
-    URL = "http://www.slideshare.net/search/slideshow?searchfrom=header&q=" + word
+    URL = "http://www.slideshare.net/search/"
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
 
-    driver.execute_script('window.scrollTo(0, -4000)') # ページの位置を一番上にスクロールさせる
-    time.sleep(5)
-    japan = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']") # 言語選択リストの日本語の部分を抽出
-    japan.click() # 言語選択の日本語を選択
-    time.sleep(3) 
+    driver.execute_script('window.scrollTo(0, -1000)') # ページの位置を一番上にスクロールさせる
+    time.sleep(3) # スクロール待ち
+
+    search = driver.find_element_by_id("nav-search-query") # 検索欄要素を取得
+    search.send_keys(word) # 検索ワードを入力
+    search.submit() # 検索をsubmitする
+    time.sleep(3) # 検索後更新待ち
+
+    lang = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']") # 言語選択リストの日本語の部分を抽出
+    lang.click() # 言語選択の日本語を選択
+    time.sleep(3) # 言語選択更新待ち
+
     for i in range(0,page): 
         print(str(i+1) + u"ページ目")
         data = driver.page_source.encode('utf-8') # ページ内の情報をutf-8で用意する
@@ -75,11 +82,11 @@ def slide(word,page):
 
             data_list.append(slide_in) # data_listに1ページ分の内容をまとめる
 
-        driver.execute_script('window.scrollTo(0, 5400)') # ページャーのある下に移動
+        driver.execute_script('window.scrollTo(0, 1000)') # ページャーのある下に移動
         next = driver.find_element_by_xpath("//li[@class='arrow']/a[@rel='next']") # ページャーのNEXT要素を抽出
         next.click() # Nextボタンをクリック
         time.sleep(3) # 移動するまで待つ
-    driver.close() # ブラウザ操作をs終わらせる
+    driver.close() # ブラウザ操作を終わらせる
     jsonstring = json.dumps(data_list,ensure_ascii=False,indent=2) # 作った辞書をjson形式にして出力する
     return jsonstring
  
