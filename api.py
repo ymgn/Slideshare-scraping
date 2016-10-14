@@ -33,7 +33,7 @@ def slide(word,page):
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
 
-    driver.execute_script('window.scrollTo(0, -1 000)') # ページの位置を一番上にスクロールさせる
+    driver.execute_script('window.scrollTo(0, -1000)') # ページの位置を一番上にスクロールさせる
     time.sleep(3) # スクロール待ち
 
     search = driver.find_element_by_id("nav-search-query") # 検索欄要素を取得
