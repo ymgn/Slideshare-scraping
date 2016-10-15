@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-#ここからスクレイピング分
-import scrapelib
 import json
-import time
+# ここからスクレイピング必要分
 from bs4 import BeautifulSoup
-# seleniumのwebdriverを使う
+# ここからseleniumでブラウザ操作必要分
 from selenium import webdriver 
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys # 文字を入力する時に使う
 
 #ここからflaskの必要分
 import os
@@ -16,7 +13,6 @@ from flask import Flask
 from flask.ext.cors import CORS
 #ここからflaskでcorsの設定 ajaxを使う時のクロスドメイン制約用
 from flask_cors import CORS, cross_origin
-
 app = Flask(__name__)
 CORS(app)
 
@@ -24,29 +20,25 @@ CORS(app)
 def index():
     return "使い方 : /api/検索する単語/取得ページ数"
 
-@app.route('/api/<string:word>/<int:page>')   
+@app.route('/api/<string:word>/<int:page>') # 検索ワード/ページ数をパスから変数に受け取る
 def slide(word,page):
  
     driver = webdriver.PhantomJS() # PhantomJSを使う 
     driver.set_window_size(1124, 850) # PhantomJSのサイズを指定する
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(10) # 指定した要素などがなかった場合出てくるまでdriverが最大10秒まで自動待機してくれる
 
     URL = "http://www.slideshare.net/search/"
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
-    #time.sleep(5) # アクセス待ち
 
     driver.execute_script('window.scrollTo(0, -3000)') # ページの位置を一番上にスクロールさせる
-    #time.sleep(5) # スクロール待ち
 
     search = driver.find_element_by_id("nav-search-query") # 検索欄要素を取得
     search.send_keys(word) # 検索ワードを入力
     search.submit() # 検索をsubmitする
-    #time.sleep(5) # 検索後更新待ち
 
     lang = driver.find_element_by_xpath("//select[@id='slideshows_lang']/option[@value='ja']") # 言語選択リストの日本語の部分を抽出
     lang.click() # 言語選択の日本語を選択
-    #time.sleep(3) # 言語選択更新待ち
 
     for i in range(0,page): 
         print(str(i+1) + u"ページ目")
@@ -88,7 +80,7 @@ def slide(word,page):
         driver.execute_script('window.scrollTo(0, 3000)') # ページャーのある下に移動
         next = driver.find_element_by_xpath("//li[@class='arrow']/a[@rel='next']") # ページャーのNEXT要素を抽出
         next.click() # Nextボタンをクリック
-        #time.sleep(3) # 移動するまで待つ
+
     driver.close() # ブラウザ操作を終わらせる
     jsonstring = json.dumps(data_list,ensure_ascii=False,indent=2) # 作った辞書をjson形式にして出力する
     return jsonstring
