@@ -32,6 +32,7 @@ def slide(word,page):
     URL = "http://www.slideshare.net/search/"
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
+    time.sleep(3) # アクセス待ち
 
     driver.execute_script('window.scrollTo(0, -3000)') # ページの位置を一番上にスクロールさせる
     time.sleep(3) # スクロール待ち
