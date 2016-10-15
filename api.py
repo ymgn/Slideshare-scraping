@@ -17,7 +17,7 @@ from flask.ext.cors import CORS
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app)
 
 @app.route('/')
 def index():
@@ -32,10 +32,10 @@ def slide(word,page):
     URL = "http://www.slideshare.net/search/"
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
-    time.sleep(3) # アクセス待ち
+    time.sleep(5) # アクセス待ち
 
     driver.execute_script('window.scrollTo(0, -3000)') # ページの位置を一番上にスクロールさせる
-    time.sleep(3) # スクロール待ち
+    time.sleep(5) # スクロール待ち
 
     search = driver.find_element_by_id("nav-search-query") # 検索欄要素を取得
     search.send_keys(word) # 検索ワードを入力
