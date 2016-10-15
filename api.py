@@ -33,7 +33,7 @@ def slide(word,page):
     driver.get(URL) # slideshareのURLにアクセスする
     data_list = [] # 全ページのデータを集める配列
 
-    driver.execute_script('window.scrollTo(0, -1000)') # ページの位置を一番上にスクロールさせる
+    driver.execute_script('window.scrollTo(0, -3000)') # ページの位置を一番上にスクロールさせる
     time.sleep(3) # スクロール待ち
 
     search = driver.find_element_by_id("nav-search-query") # 検索欄要素を取得
@@ -82,7 +82,7 @@ def slide(word,page):
 
             data_list.append(slide_in) # data_listに1ページ分の内容をまとめる
 
-        driver.execute_script('window.scrollTo(0, 1000)') # ページャーのある下に移動
+        driver.execute_script('window.scrollTo(0, 3000)') # ページャーのある下に移動
         next = driver.find_element_by_xpath("//li[@class='arrow']/a[@rel='next']") # ページャーのNEXT要素を抽出
         next.click() # Nextボタンをクリック
         time.sleep(3) # 移動するまで待つ
