@@ -82,7 +82,7 @@ def slide(word,page):
         next.click() # Nextボタンをクリック
 
     driver.close() # ブラウザ操作を終わらせる
-    jsonstring = json.dumps(data_list,ensure_ascii=False,indent=2) # 作った辞書をjson形式にして出力する
+    jsonstring = json.dumps(data_list,ensure_ascii=False,indent=2) # 作った配列をjson形式にして出力する
     return jsonstring
  
 # bashで叩いたかimportで入れたかを判定する
